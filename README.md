@@ -31,11 +31,11 @@ Before you start, ensure you have the following installed:
    ```sh
    npm install
 4. **Set up your News API key:**
-
 Obtain an API key from [News API](https://newsapi.org/), and create a `.env` file in the root directory. 
 Add your API key as follows:
-   `NEWS_API_KEY=your_news_api_key_here`
-   
+   ```sh
+      NEWS_API_KEY=your_news_api_key_here
+
 The app will start running on [http://localhost:3000](http://localhost:3000).
 
 ## Usage
@@ -57,3 +57,6 @@ Interested in contributing to NewsSphere? Your contributions are welcome! Here's
 - **Project Link**: [https://github.com/yourusername/NewsSphere](https://github.com/yourusername/NewsSphere)
 
 Stay informed with NewsSphere!
+
+
+ 

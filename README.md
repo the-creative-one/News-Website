@@ -54,7 +54,7 @@ Interested in contributing to NewsSphere? Your contributions are welcome! Here's
 
 ## Contact
 
-- **Project Link**: [https://github.com/yourusername/NewsSphere](https://github.com/yourusername/NewsSphere)
+- **Project Link**: [https://github.com/the-creative-one/News-Website](https://github.com/the-creative-one/News-Website)
 
 Stay informed with NewsSphere!
 

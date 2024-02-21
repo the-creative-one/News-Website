@@ -31,7 +31,9 @@ Before you start, ensure you have the following installed:
    ```sh
    npm install
 4. **Set up your News API key:**
-  Obtain an API key from [News API](https://newsapi.org/), and create a `.env` file in the root directory. Add your API key as follows:
+
+Obtain an API key from [News API](https://newsapi.org/), and create a `.env` file in the root directory. 
+Add your API key as follows:
    `NEWS_API_KEY=your_news_api_key_here`
    
 The app will start running on [http://localhost:3000](http://localhost:3000).

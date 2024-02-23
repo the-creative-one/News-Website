@@ -223,7 +223,10 @@ const News = (props) => {
 }
 
 
-// In class we have to write these propTypes inside the export just below the render() method using static keyword , But in Function based we write these props at the bottom just like written below and we remove the static keyword with the function name and a dot ,i.e like here the function name/class name is News, so we have to write like this 👇 News.propTypes.
+// In class we have to write these propTypes inside the export just below the render() method using static keyword , 
+// But in Function based we write these props at the bottom just like written below and we remove the static keyword 
+// with the function name and a dot ,i.e like here the function name/class name is News, 
+// so we have to write like this 👇 News.propTypes.
 
 
 News.defaultProps = {

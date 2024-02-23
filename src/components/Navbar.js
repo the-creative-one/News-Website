@@ -1,6 +1,5 @@
 import React from "react";
-// , { Component } - this was written to import the Components.
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"; // , { Component } - this was written to import the Components.
 
 // now we're converting this app from class based to function based
 
@@ -33,9 +32,6 @@ const Navbar = () => {
                   Home
                 </Link>
               </li>
-              {/* <li className="nav-item">
-                            <Link className="nav-link" to="/about">About</Link>
-                        </li> */}
               <li className="nav-item">
                 <Link className="nav-link" to="/business">
                   Business

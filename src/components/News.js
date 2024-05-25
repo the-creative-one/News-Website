@@ -15,24 +15,35 @@ const News = (props) => {
   };
 
   const updateNews = async () => {
-    props.setProgress(10);
-    setLoading(true);
-    try {
-      const response = await fetch(
-        `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`
-      );
-      const data = await response.json();
-      props.setProgress(70);
-      setArticles(data.articles || []);
-      setTotalResults(data.totalResults || 0);
-      setLoading(false);
-      props.setProgress(100);
-    } catch (error) {
-      console.error("Error fetching news:", error);
-      setLoading(false);
-      props.setProgress(100);
+  props.setProgress(10);
+  setLoading(true);
+  try {
+    const response = await fetch(
+      `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-  };
+    const data = await response.json();
+    props.setProgress(70);
+    setArticles(data.articles || []);
+    setTotalResults(data.totalResults || 0);
+    setLoading(false);
+    props.setProgress(100);
+  } catch (error) {
+    console.error("Error fetching news:", error);
+    setLoading(false);
+    props.setProgress(100);
+  }
+};
+
 
   useEffect(() => {
     document.title = `NewsSphere ~ ${capitalizeFirstLetter(props.category)}`;

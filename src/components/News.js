@@ -12,31 +12,14 @@ const News = (props) => {
   const [page, setPage] = useState(1)
   const [totalResults, setTotalResults]=useState(0)
 
- 
 
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
-  // this was for class based ,how we use props.
-  // constructor(props){
-  //   //   super(props);
-  //   //   this.state = {
-  //   //     articles: [],
-  //   //     loading: true,
-  //   //     page: 1,
-  //   //     totalResults:0
-  //   //   };
-  //   //   document.title = `NewsSphere ~ ${this.capitalizeFirstLetter(
-  //   //     this.props.category
-  //   //   )}`;
-  // }
-
+ 
  const  updateNews = async() => {
     props.setProgress(10);
-
-    // this was for class based ↓
-    // this.setState({ loading: true });
     setLoading(true);
     props.setProgress(40);
     fetch(
@@ -48,12 +31,6 @@ const News = (props) => {
         setArticles(data.articles)
         setTotalResults(data.totalResults)
         setLoading(false)
-        // this was for class based ↓
-        // this.setState({
-        //   articles: data.articles,
-        //   totalResults: data.totalResults,
-        //   loading: false,
-        // });
         props.setProgress(100);
       });
     
@@ -64,91 +41,15 @@ const News = (props) => {
     // eslint-disable-next-line
   },[])
   
-  // this was for class based ↓
-
-  // async componentDidMount() {
-  //   // this.setState({ loading: true });
-  //   // fetch(
-  //   //   `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=ed5ada73b2c6465b8b8da8d3698e759f&page=1&pageSize=${props.pageSize}`
-  //   // )
-  //   //   .then((response) => response.json())
-  //   //   .then((data) => {
-  //   //     this.setState({
-  //   //       articles: data.articles,
-  //   //       totalResults: data.totalResults,
-  //   //       loading: false,
-  //   //     });
-  //   //   });
-   
-  //   this.updateNews();
-    
-  // }
-  // // handlePreviousClick = async () => {
-  // //   // this.setState({ loading: true });
-  // //   // fetch(
-  // //   //   `https://newsapi.org/v2/top-headlines?country=${
-  // //   //     props.country
-  // //   //   }&category=${
-  // //   //     props.category
-  // //   //   }&apiKey=ed5ada73b2c6465b8b8da8d3698e759f&page=${
-  // //   //     page - 1
-  // //   //   }&pageSize=${props.pageSize}`
-  // //   // )
-  // //   //   .then((response) => response.json())
-  // //   //   .then((data) => {
-  // //   //     this.setState({
-  // //   //       page: page - 1,
-  // //   //       articles: data.articles,
-  // //   //       loading: false,
-  // //   //     });
-  // //   //   });
-  // //   this.setState({ page: page - 1 });
-  // //   this.updateNews();
-  // // };
-
-  // // handleNextClick = async () => {
-  // //   // if (
-  // //   //   page + 1 >
-  // //   //   Math.ceil(totalResults / props.pageSize)
-  // //   // ) {
-  // //   // } else {
-  // //   //   this.setState({ loading: true });
-  // //   //   fetch(
-  // //   //     `https://newsapi.org/v2/top-headlines?country=${
-  // //   //       props.country
-  // //   //     }&category=${
-  // //   //       props.category
-  // //   //     }&apiKey=ed5ada73b2c6465b8b8da8d3698e759f&page=${
-  // //   //       page + 1
-  // //   //     }&pageSize=${props.pageSize}`
-  // //   //   )
-  // //   //     .then((response) => response.json())
-  // //   //     .then((data) => {
-  // //   //       this.setState({
-  // //   //         page: page + 1,
-  // //   //         articles: data.articles,
-  // //   //         loading: false,
-  // //   //       });
-  // //   //     });
-  // //   // }
-  // //   this.setState({ page: page + 1 });
-  // //   this.updateNews();
-  // // };
+  
 
   const fetchMoreData = async () => {
     setPage(page+1)
-    // this was for class based ↓
-    // this.setState({ page: page + 1 });
     fetch(
       `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page + 1}&pageSize=${props.pageSize}`
     ).then((response) => response.json()).then((data) => {
         setArticles(articles.concat(data.articles))
         setTotalResults(data.totalResults)
-        // this was for class based ↓
-        // this.setState({
-        //   articles: articles.concat(data.articles),
-        //   totalResults: data.totalResults,
-        // });
       });
       
     
@@ -197,27 +98,7 @@ const News = (props) => {
           </div>
           </div>
         </InfiniteScroll>
-        {/* <div className="container-fluid d-flex justify-content-between">
-          <button
-            disabled={page <= 1}
-            type="button"
-            className="btn btn-danger px-3"
-            onClick={this.handlePreviousClick}
-          >
-            &larr; Previous{" "}
-          </button>
-          <button
-            disabled={
-              page + 1 >
-              Math.ceil(totalResults / props.pageSize)
-            }
-            type="button"
-            className="btn btn-danger px-3"
-            onClick={this.handleNextClick}
-          >
-            Next &rarr;
-          </button>
-        </div> */}
+        
       </>
     );
 }

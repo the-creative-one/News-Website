@@ -15,35 +15,28 @@ const News = (props) => {
   };
 
   const updateNews = async () => {
-  props.setProgress(10);
-  setLoading(true);
-  try {
-    const response = await fetch(
-      `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        }
+    props.setProgress(10);
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`
+      );
+      const data = await response.json();
+      if (response.ok) {
+        props.setProgress(70);
+        setArticles(data.articles || []);
+        setTotalResults(data.totalResults || 0);
+        setLoading(false);
+        props.setProgress(100);
+      } else {
+        throw new Error(data.message);
       }
-    );
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    } catch (error) {
+      console.error("Error fetching news:", error);
+      setLoading(false);
+      props.setProgress(100);
     }
-    const data = await response.json();
-    props.setProgress(70);
-    setArticles(data.articles || []);
-    setTotalResults(data.totalResults || 0);
-    setLoading(false);
-    props.setProgress(100);
-  } catch (error) {
-    console.error("Error fetching news:", error);
-    setLoading(false);
-    props.setProgress(100);
-  }
-};
-
+  };
 
   useEffect(() => {
     document.title = `NewsSphere ~ ${capitalizeFirstLetter(props.category)}`;
@@ -58,8 +51,12 @@ const News = (props) => {
         `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page + 1}&pageSize=${props.pageSize}`
       );
       const data = await response.json();
-      setArticles(articles.concat(data.articles || []));
-      setTotalResults(data.totalResults || 0);
+      if (response.ok) {
+        setArticles(articles.concat(data.articles || []));
+        setTotalResults(data.totalResults || 0);
+      } else {
+        throw new Error(data.message);
+      }
     } catch (error) {
       console.error("Error fetching more news:", error);
     }
